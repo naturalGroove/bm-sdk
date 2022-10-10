@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace BlueMedia\Itn\ValueObject;
 
 use BlueMedia\Common\ValueObject\AbstractValueObject;
+use BlueMedia\Hash\HashableInterface;
 use BlueMedia\Serializer\SerializableInterface;
 use JMS\Serializer\Annotation\AccessorOrder;
 use JMS\Serializer\Annotation\Type;
@@ -24,7 +25,7 @@ use JMS\Serializer\Annotation\Type;
  *      "hash"
  * })
  */
-final class Itn extends AbstractValueObject implements SerializableInterface
+final class Itn extends AbstractValueObject implements SerializableInterface, HashableInterface
 {
     /**
      * Transaction service id.
@@ -140,6 +141,11 @@ final class Itn extends AbstractValueObject implements SerializableInterface
     public function getHash(): string
     {
         return trim($this->hash);
+    }
+
+    public function isHashPresent(): bool
+    {
+        return $this->hash !== null;
     }
 
     /**
